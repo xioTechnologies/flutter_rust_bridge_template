@@ -20,20 +20,37 @@ class NativeImpl implements Native {
   factory NativeImpl.wasm(FutureOr<WasmModule> module) =>
       NativeImpl(module as ExternalLibrary);
   NativeImpl.raw(this._platform);
-  UsbConnectionInfoF getInfo({dynamic hint}) {
+  UsbConnectionInfoF getUsbInfo({dynamic hint}) {
     return _platform.executeSync(FlutterRustBridgeSyncTask(
-      callFfi: () => _platform.inner.wire_get_info(),
+      callFfi: () => _platform.inner.wire_get_usb_info(),
       parseSuccessData: _wire2api_usb_connection_info_f,
       parseErrorData: null,
-      constMeta: kGetInfoConstMeta,
+      constMeta: kGetUsbInfoConstMeta,
       argValues: [],
       hint: hint,
     ));
   }
 
-  FlutterRustBridgeTaskConstMeta get kGetInfoConstMeta =>
+  FlutterRustBridgeTaskConstMeta get kGetUsbInfoConstMeta =>
       const FlutterRustBridgeTaskConstMeta(
-        debugName: "get_info",
+        debugName: "get_usb_info",
+        argNames: [],
+      );
+
+  TcpConnectionInfoF getTcpInfo({dynamic hint}) {
+    return _platform.executeSync(FlutterRustBridgeSyncTask(
+      callFfi: () => _platform.inner.wire_get_tcp_info(),
+      parseSuccessData: _wire2api_tcp_connection_info_f,
+      parseErrorData: null,
+      constMeta: kGetTcpInfoConstMeta,
+      argValues: [],
+      hint: hint,
+    ));
+  }
+
+  FlutterRustBridgeTaskConstMeta get kGetTcpInfoConstMeta =>
+      const FlutterRustBridgeTaskConstMeta(
+        debugName: "get_tcp_info",
         argNames: [],
       );
 
@@ -44,6 +61,20 @@ class NativeImpl implements Native {
 
   String _wire2api_String(dynamic raw) {
     return raw as String;
+  }
+
+  TcpConnectionInfoF _wire2api_tcp_connection_info_f(dynamic raw) {
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return TcpConnectionInfoF(
+      ipAddress: _wire2api_String(arr[0]),
+      port: _wire2api_u16(arr[1]),
+    );
+  }
+
+  int _wire2api_u16(dynamic raw) {
+    return raw as int;
   }
 
   int _wire2api_u8(dynamic raw) {

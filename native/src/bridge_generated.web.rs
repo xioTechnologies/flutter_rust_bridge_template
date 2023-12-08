@@ -2,8 +2,13 @@ use super::*;
 // Section: wire functions
 
 #[wasm_bindgen]
-pub fn wire_get_info() -> support::WireSyncReturn {
-    wire_get_info_impl()
+pub fn wire_get_usb_info() -> support::WireSyncReturn {
+    wire_get_usb_info_impl()
+}
+
+#[wasm_bindgen]
+pub fn wire_get_tcp_info() -> support::WireSyncReturn {
+    wire_get_tcp_info_impl()
 }
 
 // Section: allocate functions

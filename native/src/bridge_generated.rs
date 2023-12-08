@@ -22,14 +22,24 @@ use std::sync::Arc;
 
 // Section: wire functions
 
-fn wire_get_info_impl() -> support::WireSyncReturn {
+fn wire_get_usb_info_impl() -> support::WireSyncReturn {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync(
         WrapInfo {
-            debug_name: "get_info",
+            debug_name: "get_usb_info",
             port: None,
             mode: FfiCallMode::Sync,
         },
-        move || Result::<_, ()>::Ok(get_info()),
+        move || Result::<_, ()>::Ok(get_usb_info()),
+    )
+}
+fn wire_get_tcp_info_impl() -> support::WireSyncReturn {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync(
+        WrapInfo {
+            debug_name: "get_tcp_info",
+            port: None,
+            mode: FfiCallMode::Sync,
+        },
+        move || Result::<_, ()>::Ok(get_tcp_info()),
     )
 }
 // Section: wrapper structs
@@ -55,6 +65,22 @@ where
     }
 }
 // Section: impl IntoDart
+
+impl support::IntoDart for TcpConnectionInfoF {
+    fn into_dart(self) -> support::DartAbi {
+        vec![
+            self.ip_address.into_into_dart().into_dart(),
+            self.port.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl support::IntoDartExceptPrimitive for TcpConnectionInfoF {}
+impl rust2dart::IntoIntoDart<TcpConnectionInfoF> for TcpConnectionInfoF {
+    fn into_into_dart(self) -> Self {
+        self
+    }
+}
 
 impl support::IntoDart for UsbConnectionInfoF {
     fn into_dart(self) -> support::DartAbi {

@@ -11,9 +11,23 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class Native {
-  UsbConnectionInfoF getInfo({dynamic hint});
+  UsbConnectionInfoF getUsbInfo({dynamic hint});
 
-  FlutterRustBridgeTaskConstMeta get kGetInfoConstMeta;
+  FlutterRustBridgeTaskConstMeta get kGetUsbInfoConstMeta;
+
+  TcpConnectionInfoF getTcpInfo({dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kGetTcpInfoConstMeta;
+}
+
+class TcpConnectionInfoF {
+  final String ipAddress;
+  final int port;
+
+  const TcpConnectionInfoF({
+    required this.ipAddress,
+    required this.port,
+  });
 }
 
 class UsbConnectionInfoF {

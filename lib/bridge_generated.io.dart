@@ -118,14 +118,25 @@ class NativeWire implements FlutterRustBridgeWireBase {
   late final _init_frb_dart_api_dl = _init_frb_dart_api_dlPtr
       .asFunction<int Function(ffi.Pointer<ffi.Void>)>();
 
-  WireSyncReturn wire_get_info() {
-    return _wire_get_info();
+  WireSyncReturn wire_get_usb_info() {
+    return _wire_get_usb_info();
   }
 
-  late final _wire_get_infoPtr =
-      _lookup<ffi.NativeFunction<WireSyncReturn Function()>>('wire_get_info');
-  late final _wire_get_info =
-      _wire_get_infoPtr.asFunction<WireSyncReturn Function()>();
+  late final _wire_get_usb_infoPtr =
+      _lookup<ffi.NativeFunction<WireSyncReturn Function()>>(
+          'wire_get_usb_info');
+  late final _wire_get_usb_info =
+      _wire_get_usb_infoPtr.asFunction<WireSyncReturn Function()>();
+
+  WireSyncReturn wire_get_tcp_info() {
+    return _wire_get_tcp_info();
+  }
+
+  late final _wire_get_tcp_infoPtr =
+      _lookup<ffi.NativeFunction<WireSyncReturn Function()>>(
+          'wire_get_tcp_info');
+  late final _wire_get_tcp_info =
+      _wire_get_tcp_infoPtr.asFunction<WireSyncReturn Function()>();
 
   void free_WireSyncReturn(
     WireSyncReturn ptr,

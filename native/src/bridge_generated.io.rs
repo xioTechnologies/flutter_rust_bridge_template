@@ -2,8 +2,13 @@ use super::*;
 // Section: wire functions
 
 #[no_mangle]
-pub extern "C" fn wire_get_info() -> support::WireSyncReturn {
-    wire_get_info_impl()
+pub extern "C" fn wire_get_usb_info() -> support::WireSyncReturn {
+    wire_get_usb_info_impl()
+}
+
+#[no_mangle]
+pub extern "C" fn wire_get_tcp_info() -> support::WireSyncReturn {
+    wire_get_tcp_info_impl()
 }
 
 // Section: allocate functions
