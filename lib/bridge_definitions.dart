@@ -18,6 +18,10 @@ abstract class Native {
   Future<bool> rustReleaseMode({dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kRustReleaseModeConstMeta;
+
+  String sayHello({dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kSayHelloConstMeta;
 }
 
 enum Platform {

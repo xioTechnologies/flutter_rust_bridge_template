@@ -54,10 +54,31 @@ class NativeImpl implements Native {
         argNames: [],
       );
 
+  String sayHello({dynamic hint}) {
+    return _platform.executeSync(FlutterRustBridgeSyncTask(
+      callFfi: () => _platform.inner.wire_say_hello(),
+      parseSuccessData: _wire2api_String,
+      parseErrorData: null,
+      constMeta: kSayHelloConstMeta,
+      argValues: [],
+      hint: hint,
+    ));
+  }
+
+  FlutterRustBridgeTaskConstMeta get kSayHelloConstMeta =>
+      const FlutterRustBridgeTaskConstMeta(
+        debugName: "say_hello",
+        argNames: [],
+      );
+
   void dispose() {
     _platform.dispose();
   }
 // Section: wire2api
+
+  String _wire2api_String(dynamic raw) {
+    return raw as String;
+  }
 
   bool _wire2api_bool(dynamic raw) {
     return raw as bool;
@@ -69,6 +90,14 @@ class NativeImpl implements Native {
 
   Platform _wire2api_platform(dynamic raw) {
     return Platform.values[raw as int];
+  }
+
+  int _wire2api_u8(dynamic raw) {
+    return raw as int;
+  }
+
+  Uint8List _wire2api_uint_8_list(dynamic raw) {
+    return raw as Uint8List;
   }
 }
 

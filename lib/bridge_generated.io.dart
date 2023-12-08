@@ -146,6 +146,15 @@ class NativeWire implements FlutterRustBridgeWireBase {
   late final _wire_rust_release_mode =
       _wire_rust_release_modePtr.asFunction<void Function(int)>();
 
+  WireSyncReturn wire_say_hello() {
+    return _wire_say_hello();
+  }
+
+  late final _wire_say_helloPtr =
+      _lookup<ffi.NativeFunction<WireSyncReturn Function()>>('wire_say_hello');
+  late final _wire_say_hello =
+      _wire_say_helloPtr.asFunction<WireSyncReturn Function()>();
+
   void free_WireSyncReturn(
     WireSyncReturn ptr,
   ) {

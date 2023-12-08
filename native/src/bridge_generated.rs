@@ -42,6 +42,16 @@ fn wire_rust_release_mode_impl(port_: MessagePort) {
         move || move |task_callback| Result::<_, ()>::Ok(rust_release_mode()),
     )
 }
+fn wire_say_hello_impl() -> support::WireSyncReturn {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync(
+        WrapInfo {
+            debug_name: "say_hello",
+            port: None,
+            mode: FfiCallMode::Sync,
+        },
+        move || Result::<_, ()>::Ok(say_hello()),
+    )
+}
 // Section: wrapper structs
 
 // Section: static checks

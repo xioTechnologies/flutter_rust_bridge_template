@@ -11,6 +11,11 @@ pub extern "C" fn wire_rust_release_mode(port_: i64) {
     wire_rust_release_mode_impl(port_)
 }
 
+#[no_mangle]
+pub extern "C" fn wire_say_hello() -> support::WireSyncReturn {
+    wire_say_hello_impl()
+}
+
 // Section: allocate functions
 
 // Section: related functions

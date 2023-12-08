@@ -36,6 +36,8 @@ class NativeWasmModule implements WasmModule {
   external dynamic /* void */ wire_platform(NativePortType port_);
 
   external dynamic /* void */ wire_rust_release_mode(NativePortType port_);
+
+  external dynamic /* String */ wire_say_hello();
 }
 
 // Section: WASM wire connector
@@ -48,4 +50,6 @@ class NativeWire extends FlutterRustBridgeWasmWireBase<NativeWasmModule> {
 
   void wire_rust_release_mode(NativePortType port_) =>
       wasmModule.wire_rust_release_mode(port_);
+
+  dynamic /* String */ wire_say_hello() => wasmModule.wire_say_hello();
 }

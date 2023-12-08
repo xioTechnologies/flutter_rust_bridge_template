@@ -11,6 +11,11 @@ pub fn wire_rust_release_mode(port_: MessagePort) {
     wire_rust_release_mode_impl(port_)
 }
 
+#[wasm_bindgen]
+pub fn wire_say_hello() -> support::WireSyncReturn {
+    wire_say_hello_impl()
+}
+
 // Section: allocate functions
 
 // Section: related functions
