@@ -11,32 +11,9 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class Native {
-  Future<Platform> platform({dynamic hint});
-
-  FlutterRustBridgeTaskConstMeta get kPlatformConstMeta;
-
-  Future<bool> rustReleaseMode({dynamic hint});
-
-  FlutterRustBridgeTaskConstMeta get kRustReleaseModeConstMeta;
-
-  String sayHello({dynamic hint});
-
-  FlutterRustBridgeTaskConstMeta get kSayHelloConstMeta;
-
   UsbConnectionInfoF getInfo({dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kGetInfoConstMeta;
-}
-
-enum Platform {
-  Unknown,
-  Android,
-  Ios,
-  Windows,
-  Unix,
-  MacIntel,
-  MacApple,
-  Wasm,
 }
 
 class UsbConnectionInfoF {

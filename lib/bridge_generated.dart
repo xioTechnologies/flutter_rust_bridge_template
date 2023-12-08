@@ -20,57 +20,6 @@ class NativeImpl implements Native {
   factory NativeImpl.wasm(FutureOr<WasmModule> module) =>
       NativeImpl(module as ExternalLibrary);
   NativeImpl.raw(this._platform);
-  Future<Platform> platform({dynamic hint}) {
-    return _platform.executeNormal(FlutterRustBridgeTask(
-      callFfi: (port_) => _platform.inner.wire_platform(port_),
-      parseSuccessData: _wire2api_platform,
-      parseErrorData: null,
-      constMeta: kPlatformConstMeta,
-      argValues: [],
-      hint: hint,
-    ));
-  }
-
-  FlutterRustBridgeTaskConstMeta get kPlatformConstMeta =>
-      const FlutterRustBridgeTaskConstMeta(
-        debugName: "platform",
-        argNames: [],
-      );
-
-  Future<bool> rustReleaseMode({dynamic hint}) {
-    return _platform.executeNormal(FlutterRustBridgeTask(
-      callFfi: (port_) => _platform.inner.wire_rust_release_mode(port_),
-      parseSuccessData: _wire2api_bool,
-      parseErrorData: null,
-      constMeta: kRustReleaseModeConstMeta,
-      argValues: [],
-      hint: hint,
-    ));
-  }
-
-  FlutterRustBridgeTaskConstMeta get kRustReleaseModeConstMeta =>
-      const FlutterRustBridgeTaskConstMeta(
-        debugName: "rust_release_mode",
-        argNames: [],
-      );
-
-  String sayHello({dynamic hint}) {
-    return _platform.executeSync(FlutterRustBridgeSyncTask(
-      callFfi: () => _platform.inner.wire_say_hello(),
-      parseSuccessData: _wire2api_String,
-      parseErrorData: null,
-      constMeta: kSayHelloConstMeta,
-      argValues: [],
-      hint: hint,
-    ));
-  }
-
-  FlutterRustBridgeTaskConstMeta get kSayHelloConstMeta =>
-      const FlutterRustBridgeTaskConstMeta(
-        debugName: "say_hello",
-        argNames: [],
-      );
-
   UsbConnectionInfoF getInfo({dynamic hint}) {
     return _platform.executeSync(FlutterRustBridgeSyncTask(
       callFfi: () => _platform.inner.wire_get_info(),
@@ -95,18 +44,6 @@ class NativeImpl implements Native {
 
   String _wire2api_String(dynamic raw) {
     return raw as String;
-  }
-
-  bool _wire2api_bool(dynamic raw) {
-    return raw as bool;
-  }
-
-  int _wire2api_i32(dynamic raw) {
-    return raw as int;
-  }
-
-  Platform _wire2api_platform(dynamic raw) {
-    return Platform.values[raw as int];
   }
 
   int _wire2api_u8(dynamic raw) {
