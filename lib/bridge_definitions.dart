@@ -22,6 +22,10 @@ abstract class Native {
   String sayHello({dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kSayHelloConstMeta;
+
+  UsbConnectionInfoF getInfo({dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kGetInfoConstMeta;
 }
 
 enum Platform {
@@ -33,4 +37,12 @@ enum Platform {
   MacIntel,
   MacApple,
   Wasm,
+}
+
+class UsbConnectionInfoF {
+  final String portName;
+
+  const UsbConnectionInfoF({
+    required this.portName,
+  });
 }

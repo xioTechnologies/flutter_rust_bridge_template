@@ -52,6 +52,16 @@ fn wire_say_hello_impl() -> support::WireSyncReturn {
         move || Result::<_, ()>::Ok(say_hello()),
     )
 }
+fn wire_get_info_impl() -> support::WireSyncReturn {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync(
+        WrapInfo {
+            debug_name: "get_info",
+            port: None,
+            mode: FfiCallMode::Sync,
+        },
+        move || Result::<_, ()>::Ok(get_info()),
+    )
+}
 // Section: wrapper structs
 
 // Section: static checks
@@ -93,6 +103,18 @@ impl support::IntoDart for Platform {
 }
 impl support::IntoDartExceptPrimitive for Platform {}
 impl rust2dart::IntoIntoDart<Platform> for Platform {
+    fn into_into_dart(self) -> Self {
+        self
+    }
+}
+
+impl support::IntoDart for UsbConnectionInfoF {
+    fn into_dart(self) -> support::DartAbi {
+        vec![self.port_name.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl support::IntoDartExceptPrimitive for UsbConnectionInfoF {}
+impl rust2dart::IntoIntoDart<UsbConnectionInfoF> for UsbConnectionInfoF {
     fn into_into_dart(self) -> Self {
         self
     }

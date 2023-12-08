@@ -149,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Platform.Wasm => 'the Web',
                   Platform.Unknown => 'Unknown OS',
                 };
-                return Text('$text ($releaseText) ' + api.sayHello(), style: style);
+                return Text('$text ($releaseText) ' + api.sayHello()  + ' ' + api.getInfo().portName, style: style);
               },
             )
           ],

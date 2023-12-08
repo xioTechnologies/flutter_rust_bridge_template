@@ -71,6 +71,23 @@ class NativeImpl implements Native {
         argNames: [],
       );
 
+  UsbConnectionInfoF getInfo({dynamic hint}) {
+    return _platform.executeSync(FlutterRustBridgeSyncTask(
+      callFfi: () => _platform.inner.wire_get_info(),
+      parseSuccessData: _wire2api_usb_connection_info_f,
+      parseErrorData: null,
+      constMeta: kGetInfoConstMeta,
+      argValues: [],
+      hint: hint,
+    ));
+  }
+
+  FlutterRustBridgeTaskConstMeta get kGetInfoConstMeta =>
+      const FlutterRustBridgeTaskConstMeta(
+        debugName: "get_info",
+        argNames: [],
+      );
+
   void dispose() {
     _platform.dispose();
   }
@@ -98,6 +115,15 @@ class NativeImpl implements Native {
 
   Uint8List _wire2api_uint_8_list(dynamic raw) {
     return raw as Uint8List;
+  }
+
+  UsbConnectionInfoF _wire2api_usb_connection_info_f(dynamic raw) {
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return UsbConnectionInfoF(
+      portName: _wire2api_String(arr[0]),
+    );
   }
 }
 

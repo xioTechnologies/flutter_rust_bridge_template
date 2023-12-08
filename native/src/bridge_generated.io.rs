@@ -16,6 +16,11 @@ pub extern "C" fn wire_say_hello() -> support::WireSyncReturn {
     wire_say_hello_impl()
 }
 
+#[no_mangle]
+pub extern "C" fn wire_get_info() -> support::WireSyncReturn {
+    wire_get_info_impl()
+}
+
 // Section: allocate functions
 
 // Section: related functions

@@ -155,6 +155,15 @@ class NativeWire implements FlutterRustBridgeWireBase {
   late final _wire_say_hello =
       _wire_say_helloPtr.asFunction<WireSyncReturn Function()>();
 
+  WireSyncReturn wire_get_info() {
+    return _wire_get_info();
+  }
+
+  late final _wire_get_infoPtr =
+      _lookup<ffi.NativeFunction<WireSyncReturn Function()>>('wire_get_info');
+  late final _wire_get_info =
+      _wire_get_infoPtr.asFunction<WireSyncReturn Function()>();
+
   void free_WireSyncReturn(
     WireSyncReturn ptr,
   ) {
